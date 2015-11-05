@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+
+<head>
+            
+        <html xmlns="http://www.w3.org/1999/xhtml">
+        <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+  <!-- jQuery -->
+<script type="text/javascript" charset="utf8" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+  <!-- high chart-->
+        <script src="http://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    </head>
+
+<body>
+    
+<!-- CHARTS BEGIN------------------------------------------------------------------------------------------>
+               
+    <!--Chart for A Rated------------------------------------------------------------------------------------------------>
+    <script>
+$(function () {
+    $('#container').highcharts({
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Pecent of "A" Rated Hospitals in the U.S. by State'
+        },
+        subtitle: {
+            text: 'Source: <a href="http://www.hospitalsafetyscore.org/your-hospitals-safety-score/state-rankings">The Leap Frog Group</a>'
+        },
+        xAxis: {
+            type: 'category',
+            labels: {
+                rotation: -45,
+                style: {
+                    fontSize: '13px',
+                    fontFamily: 'Verdana, sans-serif'
+                }
+            }
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Percent (%)'
+            }
+        },
+        legend: {
+            enabled: false
+        },
+        tooltip: {
+            pointFormat: '<b>{point.y:.1f}% millions</b>'
+        },
+        series: [{
+            name: 'Percentage',
+            data: [
+                ['Maine', 68.8],
+                ['Massachusetts', 60.3],
+                ['Florida', 56.4],
+                ['Virginia', 53.1],
+                ['New Jersey', 47.8],
+                ['Illinois', 43.6],
+                ['Tennessee', 40.3],
+                ['North Carolina', 38.0],
+                ['Colorado', 37.5],
+                ['Georgia', 34.8],
+                ['California', 34.6],
+                ['South Dakota', 33.3],
+                ['Texas', 33.0],
+                ['Utah', 31.8],
+                ['Ohio', 28.0],
+                ['Idaho', 27.3],
+                ['Arizona', 26.7],
+                ['Wisconsin', 26.1],
+                ['Kentucky', 24.5],
+                ['Louisiana', 23.9],
+                ['Michigan', 23.8],
+                ['Pennsylvania', 23.7],
+                ['New Hampshire', 23.1],
+                ['Kansas', 22.6],
+                ['Hawaii', 22.2],
+                ['Soth Carolina', 22.2],
+                ['Iowa', 20.7],
+                ['Delaware', 20.0],
+                ['Oregon', 20.0],
+                ['Oklahoma', 19.4],
+                ['Nebraska', 18.8],
+                ['Minnesota', 18.4],
+                ['Washington', 18.2],
+                ['New York', 17.9],
+                ['Alabama', 16.7],
+                ['Connecticut', 16.0],
+                ['Indiana', 15.3],
+                ['Mississippi', 15.2],
+                ['Nevada', 15.0],
+                ['Arkansas', 12.9],
+                ['Mondatana', 11.5],
+                ['Rhode Island', 11.1],
+                ['West Virginia', 11.1],
+                ['Alaska', 8.3]
+            ],
+            dataLabels: {
+                enabled: false,
+                rotation: -90,
+                color: '#FFFFFF',
+                align: 'right',
+                format: '{point.y:.1f}', // one decimal
+                y: 10, // 10 pixels down from the top
+                style: {
+                    fontSize: '13px',
+                    fontFamily: 'Verdana, sans-serif'
+                }
+            }
+        }]
+    });
+});
+</script>
+    
+     <!-- END OF JS FOR CHART ABOUT A% HOSPITALS ---------------------------------------------------------------------->
+    <!-- CHART 2 PIE CHART-->
+    <script>
+    $(function () {
+
+    var colors = Highcharts.getOptions().colors,
+        categories = ['Cather Associated Urinary Tract', 'Central Line Associated Blood', 'Abdominal Hyterectomy Infection'],
+        data = [{
+            y: 25,
+            color: colors[0],
+            drilldown: {
+                name: 'Cather Associated Urinary Tract',
+                categories: ['Kansas 6.0', 'Alabama 7.0', 'Florida 8.0', 'Kentucky 9.0', 'MSIE 10.0', 'MSIE 11.0'],
+                data: [25],
+                color: colors[0]
+            }
+        }, {
+            y: 25,
+            color: colors[1],
+            drilldown: {
+                name: 'Central Line Associated Blood',
+                categories: ['Kentucky', 'New York ', 'Virignia ', 'Firefox v37', 'Alabama '],
+                data: [25],
+                color: colors[1]
+            }
+        },
+                {
+            y: 50,
+            color: colors[2],
+            drilldown: {
+                name: 'Abdominal Hytersectomy Infection',
+                categories: ['Texas', 'Fl', 'NC','SC', 'Cali'],
+                data: [50],
+                color: colors[2]
+            }
+        }],
+        browserData = [],
+        versionsData = [],
+        i,
+        j,
+        dataLen = data.length,
+        drillDataLen,
+        brightness;
+
+
+    // Build the data arrays
+    for (i = 0; i < dataLen; i += 1) {
+
+        // add browser data
+        browserData.push({
+            name: categories[i],
+            y: data[i].y,
+            color: data[i].color
+        });
+
+        // add version data
+        drillDataLen = data[i].drilldown.data.length;
+        for (j = 0; j < drillDataLen; j += 1) {
+            brightness = 0.2 - (j / drillDataLen) / 5;
+            versionsData.push({
+                name: data[i].drilldown.categories[j],
+                y: data[i].drilldown.data[j],
+                color: Highcharts.Color(data[i].color).brighten(brightness).get()
+            });
+        }
+    }
+
+    // Create the chart
+    $('#pieContainer').highcharts({
+        chart: {
+            type: 'pie'
+        },
+        title: {
+            text: 'Browser market share, January, 2015 to May, 2015'
+        },
+        subtitle: {
+            text: 'Source: <a href="http://netmarketshare.com/">netmarketshare.com</a>'
+        },
+        yAxis: {
+            title: {
+                text: 'Total percent market share'
+            }
+        },
+        plotOptions: {
+            pie: {
+                shadow: false,
+                center: ['50%', '50%']
+            }
+        },
+        tooltip: {
+            valueSuffix: '%'
+        },
+        series: [{
+            name: 'Browsers',
+            data: browserData,
+            size: '60%',
+            dataLabels: {
+                formatter: function () {
+                    return this.y > 5 ? this.point.name : null;
+                },
+                color: '#ffffff',
+                distance: -30
+            }
+        }, {
+            name: 'Versions',
+            data: versionsData,
+            size: '80%',
+            innerSize: '60%',
+            dataLabels: {
+                formatter: function () {
+                    // display only if larger than 1
+                    return this.y > 1 ? '<b>' + this.point.name + ':</b> ' + this.y + '%' : null;
+                }
+            }
+        }]
+    });
+});
+    
+    </script>
+
+<!-- CHART 2 PIE CHART ENDS-------------------------------------------------------->
+    
+    <div class="row">
+        <div class="title-box col-sm-12 col-md-12">
+            <h1> Am I in good hands?</h1>
+            <p> <!-- by-line-->
+            BY ROCIO SEVILLA DIEGUEZ - ROCIOSEV@LIVE.UNC.EDU
+            <br>
+                11/4/2015 | Updated: 11/4/2015
+        </p>
+    <p>The number of health related infections around the United States is alarming, the high rate of misdiagnosis is unveliabable, and the amount of people who are dissatisfied with the serrvice they receive in hospitals is shocking.</p>
+        </div>
+    </div>
+     <div class="row">
+    <div class="intro-text col-lg-12-col-md-12 col-sm-12">
+       The LeapFrog team does an annual report where it ranks hospitals across the U.S. wiht a letter value depending on 28 benchmarks, some of which are:
+       <ul>
+        <li>ICU Physicial Stagging (IPS)</li>
+        <li>Leadership Structures and Systems</li>
+        <li>Culture Measurement, Feedback & Intervention</li>
+        <li>Teamwork Training and Skill Building</li>
+        <li>Identification and Mitigration of Risks and Hazards</li>
+        <li>Hand Hygine</li>
+        <li> Death Among Surginal Inpatients</li>
+        <li> Antibiotic Selection</li>
+        <li> Antibiotic within 1 hour</li>
+        <li> Falls anD Trauma</li>
+       </ul>
+    </div> <!-- intro intro text ends-->
+      
+            <div class="row col-lg-12-col-md-12 col-sm-12">
+
+<div id="pieContainer" style="min-width: 300px; height: 400px; margin: 0 auto"></div>
+
+<div id="container" style="width: 600px; height: 400px; margin: 0 auto"></div>
+
+    </div> 
+           <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="js/bootstrap.min.js"></script>
+</body>
+        </html>
+
